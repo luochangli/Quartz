@@ -24,3 +24,12 @@ C:\Users\zvere143\1.MyWork\DirectShow\MyMediaPlayer\MyMediaPlayer\MyMediaPlayer\
 C:\Users\zvere143\1.MyWork\DirectShow\MyMediaPlayer\MyMediaPlayer\MyMediaPlayer\obj\x86\Debug\MyMediaPlayer.frmMain.resources
 C:\Users\zvere143\1.MyWork\DirectShow\MyMediaPlayer\MyMediaPlayer\MyMediaPlayer\obj\x86\Debug\MyMediaPlayer.Properties.Resources.resources
 C:\Users\zvere143\1.MyWork\DirectShow\MyMediaPlayer\MyMediaPlayer\MyMediaPlayer\obj\x86\Debug\MyMediaPlayer.csproj.GenerateResource.Cache
+C:\Users\zvere143\1.MyWork\Quartz\MyMediaPlayer\MyMediaPlayer\MyMediaPlayer\obj\x86\Debug\MyMediaPlayer.exe
+C:\Users\zvere143\1.MyWork\Quartz\MyMediaPlayer\MyMediaPlayer\MyMediaPlayer\obj\x86\Debug\MyMediaPlayer.pdb
+C:\Users\zvere143\1.MyWork\Quartz\MyMediaPlayer\MyMediaPlayer\MyMediaPlayer\bin\Debug\MyMediaPlayer.exe
+C:\Users\zvere143\1.MyWork\Quartz\MyMediaPlayer\MyMediaPlayer\MyMediaPlayer\bin\Debug\MyMediaPlayer.pdb
+C:\Users\zvere143\1.MyWork\Quartz\MyMediaPlayer\MyMediaPlayer\MyMediaPlayer\obj\x86\Debug\MyMediaPlayer.csprojResolveAssemblyReference.cache
+C:\Users\zvere143\1.MyWork\Quartz\MyMediaPlayer\MyMediaPlayer\MyMediaPlayer\obj\x86\Debug\TestTrackBar.Controls.ctlMyTrackBar.resources
+C:\Users\zvere143\1.MyWork\Quartz\MyMediaPlayer\MyMediaPlayer\MyMediaPlayer\obj\x86\Debug\MyMediaPlayer.frmMain.resources
+C:\Users\zvere143\1.MyWork\Quartz\MyMediaPlayer\MyMediaPlayer\MyMediaPlayer\obj\x86\Debug\MyMediaPlayer.Properties.Resources.resources
+C:\Users\zvere143\1.MyWork\Quartz\MyMediaPlayer\MyMediaPlayer\MyMediaPlayer\obj\x86\Debug\MyMediaPlayer.csproj.GenerateResource.Cache

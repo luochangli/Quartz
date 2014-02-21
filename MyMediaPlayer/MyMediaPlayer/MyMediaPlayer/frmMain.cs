@@ -46,7 +46,8 @@ namespace MyMediaPlayer
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 this.Text = openFileDialog + "[Play]";
-                mMedia.loadFile(openFileDialog.FileName, this.pnlMedia);
+                //mMedia.loadFile(openFileDialog.FileName, this.pnlMedia);\
+                mMedia.OpenFile(openFileDialog.FileName, this.pnlMedia);
                 tmrVideo.Start();
                 tSBPause.Enabled = true;
                 tSBStop.Enabled = true;

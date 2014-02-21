@@ -22,6 +22,8 @@ namespace MyMediaPlayer
         public enum mStatus{Play, Stop, Pause, Empty}
         public mStatus currentStatus;
 
+        private const int WM_APP = 0x8000;
+        private const int WM_GRAPHNOTIFY = WM_APP + 1;
         private const int WS_CHILD = 0x40000000;
         private const int WS_CLIPCHILDREN = 0x2000000;
 
@@ -29,9 +31,11 @@ namespace MyMediaPlayer
 
         private IVideoWindow   mWindow = null;
         private IMediaControl  mControl = null;
-        public IMediaPosition mPosition = null;
-        private IMediaEvent    mEvent; //События
-        private IBasicAudio    mAudio;
+        public IMediaPosition  mPosition = null;
+        private IBasicAudio    mAudio =null;
+        private IMediaEvent m_objMediaEvent = null;
+        private IMediaEventEx m_objMediaEventEx = null;
+       
         
         public int second1;
         public int ctlTrackPosition;
@@ -40,27 +44,95 @@ namespace MyMediaPlayer
 
        public void loadFile(string sfile, Panel vPanel)
        {
-            //mControl.RenderFile(sfile);
-            //graphManager.RenderFile(sfile);
-            mWindow = graphManager as IVideoWindow;
-            mControl  = graphManager as IMediaControl;
-            mControl.RenderFile(sfile);
-            mPosition = graphManager as IMediaPosition;
-            mAudio    = graphManager as IBasicAudio;
-           
-           //mWindow.Owner = (int) vPanel.Handle;
-           //mWindow.WindowStyle = WS_CHILD | WS_CLIPCHILDREN;
-           //mWindow.SetWindowPosition(vPanel.ClientRectangle.Left,
-                                       //vPanel.ClientRectangle.Top,
-                                       //vPanel.ClientRectangle.Width,
-                                       //vPanel.ClientRectangle.Height);
+           if(mControl != null) mControl.Stop();
+           if (mWindow != null)
+           {
+               mWindow.Visible = 0;
+               mWindow.Owner = 0;
+           }
+           if (mControl != null) mControl = null;
+           if (mPosition != null) mPosition = null;
+           if (mWindow != null) mWindow = null;
+           if (mAudio != null) mAudio = null;
+           if (graphManager != null) graphManager = null;
+
+           graphManager = new FilgraphManager();
+           graphManager.RenderFile(sfile);
+           mWindow   = graphManager as IVideoWindow;
+           mControl  = graphManager as IMediaControl;
+           mPosition = graphManager as IMediaPosition;
+           mAudio    = graphManager as IBasicAudio;
+
+           mWindow.Owner = (int)vPanel.Handle;
+           mWindow.WindowStyle = WS_CHILD | WS_CLIPCHILDREN;
+           mWindow.SetWindowPosition(vPanel.ClientRectangle.Left,
+                                        vPanel.ClientRectangle.Top,
+                                        vPanel.ClientRectangle.Width,
+                                        vPanel.ClientRectangle.Height);
             //=========================================================
             second1 = (int) mPosition.Duration;
             ctlTrackPosition = second1;
             mControl.Run();
             currentStatus = mStatus.Play;
-            //return true;
+            
         }
+
+       public void OpenFile(string sfile, Panel vPanel)
+       {
+           CleanUp();
+
+           graphManager = new FilgraphManager();
+           graphManager.RenderFile(sfile);
+
+           mAudio = graphManager as IBasicAudio;
+
+           try
+           {
+               mWindow = graphManager as IVideoWindow;
+               mWindow.Owner = (int)vPanel.Handle;
+               mWindow.WindowStyle = WS_CHILD | WS_CLIPCHILDREN;
+               mWindow.SetWindowPosition(vPanel.ClientRectangle.Left,
+                   vPanel.ClientRectangle.Top,
+                   vPanel.ClientRectangle.Width,
+                   vPanel.ClientRectangle.Height);
+           }
+           catch (Exception)
+           {
+               mWindow = null;
+
+           }
+
+           m_objMediaEvent = graphManager as IMediaEvent;
+
+           m_objMediaEventEx = graphManager as IMediaEventEx;
+           m_objMediaEventEx.SetNotifyWindow((int)vPanel.Handle, WM_GRAPHNOTIFY, 0);
+           mPosition = graphManager as IMediaPosition;
+           mControl = graphManager as IMediaControl;
+
+           mControl.Run();
+       }
+
+       private void CleanUp()
+       {
+           if (mControl != null)
+               mControl.Stop();
+           if (m_objMediaEventEx != null)
+               m_objMediaEventEx.SetNotifyWindow(0, 0, 0);
+
+           if (mWindow != null)
+           {
+               mWindow.Visible = 0;
+               mWindow.Owner = 0;
+           }
+
+           if (mControl != null) mControl = null;
+           if (mPosition != null) mPosition = null;
+           if (m_objMediaEventEx != null) m_objMediaEventEx = null;
+           if (m_objMediaEvent != null) m_objMediaEvent = null;
+           if (mWindow != null) mWindow = null;
+           if (mAudio != null) mAudio = null;
+           if (graphManager != null) graphManager = null;
+       }
 
        public bool playMedia()
         {
